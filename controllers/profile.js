@@ -144,7 +144,7 @@ exports.updateDisplayPicture = async (req, res) => {
   }
 };
 
-exports.getEnrolledCourses = async (req, res) => {
+exports.getEnrolledAppointments = async (req, res) => {
   try {
     const userId = req.user.id;
     let userDetails = await User.findOne({
@@ -213,7 +213,7 @@ exports.getEnrolledCourses = async (req, res) => {
   }
 };
 
-exports.instructorDashboard = async (req, res) => {
+exports.DoctorDashboard = async (req, res) => {
   try {
     const courseDetails = await Course.find({ instructor: req.user.id });
 
