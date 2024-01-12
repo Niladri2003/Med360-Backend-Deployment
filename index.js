@@ -83,7 +83,7 @@ app.get("/", (req, res) => {
 
 // Listening to the server
 app.listen(PORT, () => {
-  console.log(`App is listening at ${PORT}`);
+  console.log(`App is listening  ${PORT}`);
 });
 
 // End of code.
