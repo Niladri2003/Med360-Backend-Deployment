@@ -9,6 +9,8 @@ const { cloudinaryConnect } = require("./config/cloudinary");
 const dotenv = require("dotenv");
 const database = require("./config/database");
 const fileUpload = require("express-fileupload");
+const swaggerJSDoc=require("swagger-jsdoc");
+const swaggerUi=require("swagger-ui-express");
 
 const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
@@ -18,10 +20,11 @@ const contactUsRoute = require("./routes/Contact");
 
 const { storeHealthRecord } = require("./controllers/HealthRecord");
 const { uploadImageToGCS } = require("./utils/fileUploader");
+const {swaggerDocs} = require("./utils/swaggerDocs");
 
 // Setting up port number
 const PORT = process.env.PORT || 4000;
-
+swaggerDocs(app,PORT);
 // Loading environment variables from .env file
 dotenv.config();
 
@@ -64,6 +67,46 @@ app.use(
 // Connecting to cloudinary
 cloudinaryConnect();
 
+//swagger setup
+// const swaggerOptions={
+//     definition:{
+//         openapi:"3.0.0",
+//         info:{
+//             title:"MED360 backend API Documentation",
+//             version:"1.0.0",
+//             description:"All api related to MED360 development",
+//         },
+//         components: {
+//             securitySchemes: {
+//                 bearerAuth: {
+//                     type: "http",
+//                     scheme: "bearer",
+//                     bearerFormat: "JWT",
+//                 },
+//             },
+//         },
+//         servers:[
+//             {
+//                 url:`http://localhost:4000`,
+//             }
+//         ]
+//     },
+//     apis:["./routes/*.js"],
+// }
+// const swaggerSpec=swaggerJSDoc(swaggerOptions);
+//
+// //server swagger UI
+// app.use("api-doc",swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.get("/api-doc.json",(req,res)=>{
+//     res.setHeader("Content-Type", "application/json");
+//     res.send(swaggerSpec);
+// })
+
+
+
+
+
+
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
@@ -85,5 +128,6 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`App is listening  ${PORT}`);
 });
+
 
 // End of code.

@@ -23,6 +23,28 @@ const { auth } = require("../middleware/auth")
 // ********************************************************************************************************
 
 // Route for user login
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: User login
+ *     description: Endpoint to log in a user.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: A successful response
+ */
 router.post("/login", login)
 
 // Route for user signup
