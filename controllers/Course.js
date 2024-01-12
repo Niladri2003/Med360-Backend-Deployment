@@ -3,7 +3,10 @@ const Category = require("../models/Category");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
-// Function to create a new course
+
+
+
+// Function to Publish a Doctor publishments
 exports.createDoctorPublishments = async (req, res) => {
   try {
     // Get user ID from request object
@@ -50,7 +53,7 @@ exports.createDoctorPublishments = async (req, res) => {
       });
     }
 
-    // Check if the tag given is valid
+    // Check if the Category given is valid
     const categoryDetails = await Category.findById(category);
     if (!categoryDetails) {
       return res.status(404).json({
@@ -90,7 +93,7 @@ exports.createDoctorPublishments = async (req, res) => {
       },
       { new: true }
     );
-    // Add the new course to the Categories
+    // Add the new Doctor to the Categories
     const categoryDetails2 = await Category.findByIdAndUpdate(
       { _id: category },
       {
@@ -105,10 +108,10 @@ exports.createDoctorPublishments = async (req, res) => {
     res.status(200).json({
       success: true,
       data: newCourse,
-      message: "Course Created Successfully",
+      message: "Doctor Published  Successfully",
     });
   } catch (error) {
-    // Handle any errors that occur during the creation of the course
+    // Handle any errors that occur during the publication of DoctorDetails
     console.error(error);
     res.status(500).json({
       success: false,
@@ -118,7 +121,7 @@ exports.createDoctorPublishments = async (req, res) => {
   }
 };
 
-// Get Course List
+// Get Doctor List
 exports.getAlldoctors = async (req, res) => {
   try {
     const allCourses = await Course.find({})
@@ -201,12 +204,12 @@ exports.getdoctorpublishments = async (req, res) => {
     });
   }
 };
-// Delete the Course
+// Delete the Doctor Publishments
 exports.deletedoctor = async (req, res) => {
   try {
     const { courseId } = req.body;
 
-    // Find the course
+    // Find the Publishments
     const course = await Course.findById(courseId);
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
@@ -252,6 +255,8 @@ exports.deletedoctor = async (req, res) => {
     });
   }
 };
+
+
 exports.getUserAppointments = async (req, res) => {
   const { userId } = req.body; // Assuming you're sending the user ID in the request parameter
   console.log(userId);
@@ -293,7 +298,8 @@ exports.getUserAppointments = async (req, res) => {
     res
       .status(200)
       .json({ success: true, appointments: formattedAppointments });
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
     res
       .status(500)

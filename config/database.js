@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const MONGODB_URL =
-  "mongodb+srv://Niladri2003:pownan00@studynation.1vhs6jk.mongodb.net/studynationDB";
+const MONGODB_URL =process.env.MONGODB_URL;
 
 exports.connect = () => {
   mongoose
@@ -10,7 +9,7 @@ exports.connect = () => {
       useNewUrlparser: true,
       useUnifiedTopology: true,
     })
-    .then(console.log(`DB Connection Success`))
+    .then(console.log(`DB Connection Success ${MONGODB_URL}`))
     .catch((err) => {
       console.log(`DB Connection Failed`);
       console.log(err);
