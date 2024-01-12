@@ -2,20 +2,20 @@
 const express = require("express");
 const app = express();
 const multer = require("multer");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const RazorPay = require("razorpay");
+const { cloudinaryConnect } = require("./config/cloudinary");
+const dotenv = require("dotenv");
+const database = require("./config/database");
+const fileUpload = require("express-fileupload");
+
 const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
 const doctorRoutes = require("./routes/Doctor");
 const paymentRoutes = require("./routes/Payments");
-const RazorPay = require("razorpay");
-// const paymentRoutes = require("./routes/Payments");
-
 const contactUsRoute = require("./routes/Contact");
-const database = require("./config/database");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const { cloudinaryConnect } = require("./config/cloudinary");
-const fileUpload = require("express-fileupload");
-const dotenv = require("dotenv");
+
 const { storeHealthRecord } = require("./controllers/HealthRecord");
 const { uploadImageToGCS } = require("./utils/fileUploader");
 
@@ -40,6 +40,7 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // Maximum file size (5 MB)
   },
 });
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -52,6 +53,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -69,10 +71,7 @@ app.use("/api/v1/course", doctorRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
 // app.post("/api/v1/upload", storeHealthRecord);
-app.post("/upload", upload.single("image"), async (req, res) => {
-  const file = req.file;
-  const link = uploadImageToGCS(file);
-});
+
 
 // Testing the server
 app.get("/", (req, res) => {

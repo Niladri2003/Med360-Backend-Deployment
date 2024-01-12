@@ -25,10 +25,10 @@ const {
 const { auth, isDoctor, isPatient, isAdmin } = require("../middleware/auth");
 
 // ********************************************************************************************************
-//                                      Course routes
+//                                      Doctor_Publishments routes
 // ********************************************************************************************************
 
-// Courses can Only be Created by Instructors
+// Publishments can Only be Created by Doctors
 router.post("/createCourse", auth, isDoctor, createDoctorPublishments);
 
 // Get all publishments Under a Specific doctor
@@ -37,7 +37,7 @@ router.get("/getInstructorCourses", auth, isDoctor, getdoctorpublishments);
 router.get("/getAllCourses", getAlldoctors);
 router.post("/getDocDetails", getfulldocdetails);
 
-// Get Details for a Specific docto
+// Get Details for a Specific doctor
 // Delete a Course
 router.delete("/deleteCourse", deletedoctor);
 
