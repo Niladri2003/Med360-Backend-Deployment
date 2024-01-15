@@ -7,7 +7,7 @@ const options = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "REST API Docs",
+            title: "MED360 Backend API",
             version: "1.0.0",
         },
         components: {
