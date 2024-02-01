@@ -9,8 +9,6 @@ const { cloudinaryConnect } = require("./config/cloudinary");
 const dotenv = require("dotenv");
 const database = require("./config/database");
 const fileUpload = require("express-fileupload");
-const swaggerJSDoc=require("swagger-jsdoc");
-const swaggerUi=require("swagger-ui-express");
 
 const userRoutes = require("./routes/user");
 const profileRoutes = require("./routes/profile");
@@ -19,7 +17,7 @@ const paymentRoutes = require("./routes/Payments");
 const contactUsRoute = require("./routes/Contact");
 
 const { storeHealthRecord } = require("./controllers/HealthRecord");
-const { uploadImageToGCS } = require("./utils/fileUploader");
+//const { uploadImageToGCS } = require("./utils/fileUploader");
 const {swaggerDocs} = require("./utils/swaggerDocs");
 
 // Setting up port number
@@ -31,27 +29,17 @@ dotenv.config();
 // Connecting to database
 database.connect();
 
-const instance = new RazorPay({
-  key_id: process.env.RAZORPAY_KEY,
-  key_secret: process.env.RAZORPAY_SECRET,
-});
 
 // Middlewares
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024, // Maximum file size (5 MB)
-  },
-});
+
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://med360-team-404.vercel.app",
-      "https://med-n4ix5hnjea-el.a.run.app",
-      "http://localhost:3000",
+      "http://localhost:3000", "http://localhost:4000",
+
     ],
     credentials: true,
   })
@@ -67,42 +55,6 @@ app.use(
 // Connecting to cloudinary
 cloudinaryConnect();
 
-//swagger setup
-// const swaggerOptions={
-//     definition:{
-//         openapi:"3.0.0",
-//         info:{
-//             title:"MED360 backend API Documentation",
-//             version:"1.0.0",
-//             description:"All api related to MED360 development",
-//         },
-//         components: {
-//             securitySchemes: {
-//                 bearerAuth: {
-//                     type: "http",
-//                     scheme: "bearer",
-//                     bearerFormat: "JWT",
-//                 },
-//             },
-//         },
-//         servers:[
-//             {
-//                 url:`http://localhost:4000`,
-//             }
-//         ]
-//     },
-//     apis:["./routes/*.js"],
-// }
-// const swaggerSpec=swaggerJSDoc(swaggerOptions);
-//
-// //server swagger UI
-// app.use("api-doc",swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-// app.get("/api-doc.json",(req,res)=>{
-//     res.setHeader("Content-Type", "application/json");
-//     res.send(swaggerSpec);
-// })
-
-
 
 
 
@@ -110,7 +62,7 @@ cloudinaryConnect();
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
-app.use("/api/v1/course", doctorRoutes);
+app.use("/api/v1/doctor", doctorRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
 // app.post("/api/v1/upload", storeHealthRecord);

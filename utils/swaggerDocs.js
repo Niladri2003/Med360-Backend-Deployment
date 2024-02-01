@@ -1,4 +1,4 @@
-const { Express, Request, Response } = require("express");
+
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi  = require("swagger-ui-express");
 const path=require("path");
@@ -27,6 +27,9 @@ const options = {
         servers:[
             {
                 url:`http://localhost:4000/api/v1`
+            },
+            {
+                url:`https://med360backend.azurewebsites.net/api/v1`
             }
         ]
     },
@@ -36,7 +39,7 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 
 exports.swaggerDocs = (app, PORT) => {
-    console.log(JSON.stringify(swaggerSpec,null,2));
+    //console.log(JSON.stringify(swaggerSpec,null,2));
     // Swagger page
     app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

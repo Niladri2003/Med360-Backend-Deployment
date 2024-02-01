@@ -87,10 +87,7 @@ exports.signup = async (req, res) => {
       about: null,
       contactNumber: null,
     });
-    const ApontmentDetails = await apointment.create({
-      patient: null,
-      doctor: null,
-    });
+
     const user = await User.create({
       firstName,
       lastName,
@@ -165,6 +162,7 @@ exports.login = async (req, res) => {
       };
       res.cookie("token", token, options).status(200).json({
         success: true,
+        token,
         user,
         message: `User Login Success`,
       });
