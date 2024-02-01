@@ -40,6 +40,7 @@ app.use(
     origin: [
       "http://localhost:3000",
         "http://localhost:4000",
+        "https://med360frontend.niladriadak.tech"
 
     ],
     credentials: true,
