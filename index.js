@@ -78,7 +78,9 @@ app.get("/", (req, res) => {
 
 // Listening to the server
 app.listen(PORT, () => {
-  console.log(`App is listening  ${PORT} Allowed Origins are ${allowedOrigins}`);
+
+  console.log(`App is listening  ${PORT}`);
+
 });
 
 
