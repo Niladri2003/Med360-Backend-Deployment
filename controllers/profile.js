@@ -2,7 +2,7 @@ const Profile = require("../models/Profile");
 const Course = require("../models/Course");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
-const { uploadImageToGCS } = require("../utils/fileUploader");
+//const { uploadImageToGCS } = require("../utils/fileUploader");
 const mongoose = require("mongoose");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 // Method for updating a profile

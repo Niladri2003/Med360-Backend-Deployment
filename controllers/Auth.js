@@ -87,10 +87,7 @@ exports.signup = async (req, res) => {
       about: null,
       contactNumber: null,
     });
-    const ApontmentDetails = await apointment.create({
-      patient: null,
-      doctor: null,
-    });
+
     const user = await User.create({
       firstName,
       lastName,
