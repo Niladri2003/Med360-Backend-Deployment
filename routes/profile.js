@@ -14,7 +14,28 @@ const {
 // ********************************************************************************************************
 //                                      Profile routes
 // ********************************************************************************************************
-// Delet User Account
+// Delete User Account
+/**
+ * @swagger
+ * tags:
+ *   - name: Profile
+ *     description: User-related endpoints
+ * /user/deleteAccount:
+ *   delete:
+ *     summary: Delete user account
+ *     description: Endpoint to delete the user account and associated data.
+ *     tags:
+ *       - Profile
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: User account deleted successfully
+ *       '404':
+ *         description: Not Found - User not found
+ *       '500':
+ *         description: Internal Server Error - Error deleting the user account
+ */
 router.delete("/deleteProfile", auth, deleteAccount);
 router.put("/updateProfile", auth, updateProfile);
 router.get("/getUserDetails", auth, getAllUserDetails);

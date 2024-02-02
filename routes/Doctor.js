@@ -22,7 +22,7 @@ const {
 } = require("../controllers/Category");
 
 // Importing Middlewares
-const { auth, isDoctor, isPatient, isAdmin } = require("../middleware/auth");
+const { auth, isDoctor,  isAdmin } = require("../middleware/auth");
 
 // ********************************************************************************************************
 //                                      Doctor_Publishments routes
@@ -34,7 +34,7 @@ router.post("/createCourse", auth, isDoctor, createDoctorPublishments);
 // Get all publishments Under a Specific doctor
 router.get("/getInstructorCourses", auth, isDoctor, getdoctorpublishments);
 
-router.get("/getAllCourses", getAlldoctors);
+router.get("/getAllDoctors", getAlldoctors);
 router.post("/getDocDetails", getfulldocdetails);
 
 // Get Details for a Specific doctor
