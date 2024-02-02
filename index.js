@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 4000;
 swaggerDocs(app,PORT);
 // Loading environment variables from .env file
 dotenv.config();
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 
 // Connecting to database
 database.connect();
@@ -35,16 +36,13 @@ database.connect();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-        "http://localhost:4000",
-        "https://med360frontend.niladriadak.tech"
 
-    ],
-    credentials: true,
-  })
+
+app.use(
+    cors({
+        origin: allowedOrigins,
+        credentials: true,
+    })
 );
 
 app.use(
@@ -80,7 +78,7 @@ app.get("/", (req, res) => {
 
 // Listening to the server
 app.listen(PORT, () => {
-  console.log(`App is listening  ${PORT}`);
+  console.log(`App is listening  ${PORT} Allowed Origins are ${allowedOrigins}`);
 });
 
 
