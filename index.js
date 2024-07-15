@@ -24,6 +24,8 @@ const PORT = process.env.PORT || 4000;
 
 // Loading environment variables from .env file
 dotenv.config();
+console.log('RAZORPAY_KEY:', process.env.RAZORPAY_KEY);
+console.log('RAZORPAY_SECRET:', process.env.RAZORPAY_SECRET);
 
 // Connecting to database
 database.connect();
