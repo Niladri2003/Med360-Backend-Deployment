@@ -51,6 +51,7 @@ app.use(
       "https://med360-team-404.vercel.app",
       "https://med-n4ix5hnjea-el.a.run.app",
       "http://localhost:3000",
+        "https://med360frontend.niladriadak.tech"
     ],
     credentials: true,
   })
